@@ -239,6 +239,7 @@ pub extern "C" fn dataset_write(
     data_ptr: *const c_void,
     data_in_c_order: bool,
 ) -> c_int {
+    println!("dataset_write called");
     assert!(!dataset_ptr.is_null());
     assert!(!bbox_ptr.is_null());
     assert!(!data_ptr.is_null());
@@ -247,8 +248,12 @@ pub extern "C" fn dataset_write(
 
     let (off, shape) = c_bbox_to_off_and_shape(bbox_ptr);
 
+    println!("c_data_to_mat");
     let mat = c_data_to_mat(&dataset, &shape, data_ptr, data_in_c_order);
+    println!("write_mat");
     let ret = dataset.write_mat(off, &mat);
+    println!("forget");
     std::mem::forget(dataset);
     check_return(ret)
+    println!("dataset_write return");
 }

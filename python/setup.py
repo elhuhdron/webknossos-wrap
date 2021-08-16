@@ -30,10 +30,10 @@ class BuildPyCommand(build_py):
         # copying to lib dir
         lib_dir = os.path.join(this_dir, "wkw", "lib")
 
-        if os.path.exists(lib_dir):
-            shutil.rmtree(lib_dir)
+        # if os.path.exists(lib_dir):
+        #     shutil.rmtree(lib_dir)
 
-        os.makedirs(lib_dir)
+        os.makedirs(lib_dir, exist_ok=True)
         shutil.copy(lib_file, os.path.join(lib_dir, lib_name))
         shutil.copy(header_file, os.path.join(lib_dir, "wkw.h"))
 

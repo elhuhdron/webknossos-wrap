@@ -181,6 +181,7 @@ class Dataset:
         return data
 
     def write(self, off, data):
+        print("python wrapper wkw write called")
         if not isinstance(data, np.ndarray):
             raise WKWException("Data must be a NumPy ndarray")
 
@@ -211,9 +212,11 @@ class Dataset:
 
         data_in_c_order = data.flags["C_CONTIGUOUS"]
         data_ptr = ffi.cast("void *", data.ctypes.data)
+        print("dataset_write")
         _check_wkw(
             libwkw.dataset_write(self.handle, box_ptr, data_ptr, data_in_c_order)
         )
+        print("python wrapper wkw write return")
 
     def compress(self, dst_path: str, compress_files: bool = False):
         header = deepcopy(self.header)
