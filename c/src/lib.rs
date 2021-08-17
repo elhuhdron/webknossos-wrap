@@ -254,6 +254,6 @@ pub extern "C" fn dataset_write(
     let ret = dataset.write_mat(off, &mat);
     println!("forget");
     std::mem::forget(dataset);
-    check_return(ret)
     println!("dataset_write return");
+    check_return(ret)
 }

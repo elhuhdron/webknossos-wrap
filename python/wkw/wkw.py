@@ -203,6 +203,7 @@ class Dataset:
             return data.flags["F_CONTIGUOUS"] or data.flags["C_CONTIGUOUS"]
 
         if not is_contiguous(data):
+            print("data not contiguous, reallocating F-order")
             data = np.asfortranarray(data)
 
         box = _build_box(off, data.shape[-3:])
